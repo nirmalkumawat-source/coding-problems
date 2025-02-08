@@ -66,7 +66,7 @@ public class BikeRentalShop {
         String id;
         String name;
         Double balance;
-        List<Rental> rentals;
+        List<RentalRecord> rentals;
     }
 
     public static class RentalRecord {

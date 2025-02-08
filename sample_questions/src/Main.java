@@ -18,11 +18,14 @@ public class Main {
 //        findNearestCities_test1();
 
 
-        System.out.println("Executing test cases for - Order Management System");
-        orderManagementSystem_test1();
-        orderManagementSystem_test2_invalidItem();
-        orderManagementSystem_test2_invalidUser();
-        orderManagementSystem_test_applyDiscount();
+//        System.out.println("Executing test cases for - Order Management System");
+//        orderManagementSystem_test1();
+//        orderManagementSystem_test2_invalidItem();
+//        orderManagementSystem_test2_invalidUser();
+//        orderManagementSystem_test_applyDiscount();
+
+        System.out.println("Executing test cases for - Cargo Management System");
+        cargoManagementSystem_test_totalCost();
 
         System.out.println("End Execution!");
     }
@@ -149,4 +152,15 @@ public class Main {
         oms.checkout("user1"); // returns 627 => 600 - 5% discount = 570 * 10% tax = 627
     }
 
+    public static void cargoManagementSystem_test_totalCost() {
+        CargoManagementSystem cms = new CargoManagementSystem();
+
+        cms.insert(new CargoManagementSystem.Package( 10, 10, 10, 10,  CargoManagementSystem.PackageType.HAZARDOUS, 10));
+        cms.insert(new CargoManagementSystem.Package( 10, 10, 10, 10,  CargoManagementSystem.PackageType.STANDARD, 11));
+        cms.insert(new CargoManagementSystem.Package( 10, 10, 10, 10,  CargoManagementSystem.PackageType.FRAGILE, 12));
+
+        cms.getTotalCosts().forEach((k, v) -> {
+            System.out.println("Package Type: " + k + ", Total Cost: " + v);
+        });
+    }
 }
