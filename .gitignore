@@ -6,3 +6,5 @@
 
 /out/*
 /.idea/*
+/sample-questions/.idea/*
+/user-journey-service/.idea/*
