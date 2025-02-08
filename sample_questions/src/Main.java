@@ -7,15 +7,23 @@ public class Main {
 
         System.out.println("Start Execution!");
 
-        // Test cases for - Find Loyal Customers
-        System.out.println("Executing test cases for - Find Loyal Customers");
-        findLoyalCustomers_test1();
-        findLoyalCustomers_test2();
-        findLoyalCustomers_test3();
+//        // Test cases for - Find Loyal Customers
+//        System.out.println("Executing test cases for - Find Loyal Customers");
+//        findLoyalCustomers_test1();
+//        findLoyalCustomers_test2();
+//        findLoyalCustomers_test3();
+//
+//        // Test cases for - Find Nearest Cities
+//        System.out.println("Executing test cases for - Find Nearest Cities");
+//        findNearestCities_test1();
 
-        // Test cases for - Find Nearest Cities
-        System.out.println("Executing test cases for - Find Nearest Cities");
-        findNearestCities_test1();
+
+        System.out.println("Executing test cases for - Order Management System");
+        orderManagementSystem_test1();
+        orderManagementSystem_test2_invalidItem();
+        orderManagementSystem_test2_invalidUser();
+        orderManagementSystem_test_applyDiscount();
+
         System.out.println("End Execution!");
     }
 
@@ -88,4 +96,57 @@ public class Main {
 
         System.out.println(result);
     }
+
+
+    public static void orderManagementSystem_test1() {
+        OrderManagementSystem oms = new OrderManagementSystem();
+
+        oms.addItemToCart("user1", "item1", 2);
+        oms.addItemToCart("user2", "item2", 2);
+        oms.addItemToCart("user1", "item3", 2);
+
+        oms.removeItemFromCart("user1", "item1");
+        oms.calculateTotal("user1"); // prints 60.0 before tax.
+        oms.checkout("user1"); // prints 66.0
+    }
+
+    public static void orderManagementSystem_test2_invalidItem() {
+        OrderManagementSystem oms = new OrderManagementSystem();
+
+        oms.addItemToCart("user1", "item1", 2);
+        oms.addItemToCart("user2", "item2", 2);
+        oms.addItemToCart("user1", "item3", 2);
+
+        oms.removeItemFromCart("user1", "item1");
+        oms.removeItemFromCart("user1", "item3");
+        oms.checkout("user1"); // returns 0.0; no items in the cart
+    }
+
+    public static void orderManagementSystem_test2_invalidUser() {
+        OrderManagementSystem oms = new OrderManagementSystem();
+
+        oms.addItemToCart("user1", "item1", 2);
+        oms.addItemToCart("user2", "item2", 2);
+        oms.addItemToCart("user1", "item3", 2);
+
+        oms.removeItemFromCart("user1", "item1");
+
+        try {
+            oms.checkout("user5"); // throws exception.
+        } catch (IllegalArgumentException e) {
+            System.out.println("Expected exception: " + e.getMessage());
+        }
+    }
+
+    public static void orderManagementSystem_test_applyDiscount() {
+        OrderManagementSystem oms = new OrderManagementSystem();
+
+        oms.addItemToCart("user1", "item1", 20);
+        oms.addItemToCart("user2", "item2", 20);
+        oms.addItemToCart("user1", "item3", 20);
+
+        oms.removeItemFromCart("user1", "item1");
+        oms.checkout("user1"); // returns 627 => 600 - 5% discount = 570 * 10% tax = 627
+    }
+
 }
